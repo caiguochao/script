@@ -1,5 +1,6 @@
 " 使用UTF-8打开文件
 set fileencodings=uft-8
+set encoding=utf-8
 " 开启实时搜索
 set incsearch
 " 搜索时大小写不敏感
@@ -15,7 +16,7 @@ let mapleader=";"
 " 开启文件类型侦测
 filetype on
 " 根据侦测到的不同类型加载对应的插件
-filetype plugin indent on
+filetype plugin on
 " 退格键功能
 set backspace=indent,eol,start
 " 关闭当前分割窗口
@@ -40,12 +41,6 @@ nmap <Leader>tc :tabc<CR>
 nmap <Leader>tf :tabfirst<CR>
 " 跳转到最后一个标签
 nmap <Leader>tl :tablast<CR>
-" 模糊搜索文件
-nmap <Leader>e <C-P>
-" 当前文件函数列表
-nnoremap <Leader>ff :CtrlPFunky<CR>
-" 转到定义
-nnoremap <Leader>fd :execute 'CtrlPFunky ' . expand('<cword>')<CR>
 
 " Vundle环境设置
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -62,24 +57,44 @@ Plugin 'jistr/vim-nerdtree-tabs'
 " 快速注释
 Plugin 'scrooloose/nerdcommenter'
 " 自动补全
-Plugin 'davidhalter/jedi-vim'
-" Tab补全
-Plugin 'ervandew/supertab'
-" pep8检查
-Plugin 'tell-k/vim-autopep8'
+Plugin 'Valloric/YouCompleteMe'
+" 代码检查
+Plugin 'kevinw/pyflakes-vim'
 " 自动补全括号
 Plugin 'jiangmiao/auto-pairs'
 " 文件搜索
 Plugin 'kien/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'fisadev/vim-ctrlp-cmdpalette'
+" 实时更新文件
+Plugin 'djoshea/vim-autoread'
 call vundle#end()
 
 """""powerline""""""
 set t_Co=256
 
-" 快速PEP8
-autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+"""""youcompleteme""
+let g:ycm_autoclose_preview_window_after_completion=1
+"是否开启语义补全"
+let g:ycm_seed_identifiers_with_syntax=1
+"是否在注释中也开启补全"
+let g:ycm_complete_in_comments=1
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"开始补全的字符数"
+let g:ycm_min_num_of_chars_for_completion=2
+"补全后自动关机预览窗口"
+let g:ycm_autoclose_preview_window_after_completion=1
+" 禁止缓存匹配项,每次都重新生成匹配项"
+let g:ycm_cache_omnifunc=0
+"字符串中也开启补全"
+let g:ycm_complete_in_strings = 1
+"离开插入模式后自动关闭预览窗口"
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"回车即选中当前项"
+inoremap <expr> <CR>       pumvisible() ? '<C-y>' : '\<CR>'     
+"上下左右键行为"
+inoremap <expr> <Down>     pumvisible() ? '\<C-n>' : '\<Down>'
+inoremap <expr> <Up>       pumvisible() ? '\<C-p>' : '\<Up>'
+inoremap <expr> <PageDown> pumvisible() ? '\<PageDown>\<C-p>\<C-n>' : '\<PageDown>'
+inoremap <expr> <PageUp>   pumvisible() ? '\<PageUp>\<C-p>\<C-n>' : '\<PageUp>'
 
 " 添加flakes
 let g:pyflakes_use_quickfix=1
@@ -108,9 +123,8 @@ set cursorline
 set hlsearch
 " 禁止折行
 set nowrap
-" 开启语法高亮功能
-syntax enable
 " 允许用指定语法高亮配色方案替换默认方案
+let python_highlight_all=1
 syntax on
 " 自动缩进
 filetype indent on
@@ -125,8 +139,10 @@ set shiftwidth=4
 " 不将制表符扩展为空格
 set noexpandtab
 
-" 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nmap <Leader>fl :NERDTreeToggle<CR>
+" 自动开启目录
+autocmd VimEnter * NERDTree
+" 使用NERDTree插件查看工程文件
+nmap <Leader>ls :NERDTreeToggle<CR>
 " 设置NERDTree子窗口宽度
 let NERDTreeWinSize=32
 " 设置NERDTree子窗口位置
@@ -140,8 +156,7 @@ let NERDTreeAutoDeleteBuffer=1
 " 忽略显示文件
 let NERDTreeIgnore=['\.pyo','\.pyc']
 
-" 设置环境保存项
-set sessionoptions="blank,buffers,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
-" 保存 undo 历史
-set undodir=~/.undo_history/
-set undofile
+" Tag配置
+set tags=./tags;$HOME/.vim/tags/python.ctags
+map <silent><C-Left> <C-T>
+map <silent><C-Right> <C-]>
