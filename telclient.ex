@@ -2,7 +2,7 @@
 set timeout 10
 spawn telnet 127.0.0.1 5600
 send "from common.EntityManager import EntityManager as e\r"
-expect "e"
+sleep 0.01
 send "_list = list(e._entities.values())\r"
 sleep 0.01
 send "_list.sort()\r"
