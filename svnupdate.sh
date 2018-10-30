@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ~/h63/Program/Script/Python
 find . -name "*.pyo" | xargs rm -f
-cd ~/h63/Program
+cd ../..
 svn update
 cd Documents
 svn update
