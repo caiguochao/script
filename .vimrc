@@ -64,7 +64,7 @@ Plugin 'Valloric/YouCompleteMe'
 " 代码检查
 Plugin 'kevinw/pyflakes-vim'
 " 自动补全括号
-Plugin 'jiangmiao/auto-pairs'
+"Plugin 'jiangmiao/auto-pairs'
 " 文件搜索
 Plugin 'kien/ctrlp.vim'
 " 全局搜索
@@ -111,8 +111,6 @@ let g:ctrlsf_auto_close = {"normal": 1, "compact": 1}
 let g:ctrlsf_auto_focus = {"at": "done", "duration_less_than": 10000}
 "搜索模式
 let g:ctrlsf_search_mode = 'async'
-"窗口高度
-let g:ctrlsf_winsize = '20%'
 "额外参数
 let g:ctrlsf_extra_backend_args = {'ack': '--ignore-file=match:/tags/'}
 "位置
