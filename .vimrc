@@ -41,7 +41,10 @@ nmap <Leader>tc :tabc<CR>
 nmap <Leader>tf :tabfirst<CR>
 " 跳转到最后一个标签
 nmap <Leader>tl :tablast<CR>
-
+" 全局搜索
+nnoremap <Leader>f :CtrlSF 
+vmap <Leader>ff <Plug>CtrlSFVwordExec
+			
 " Vundle环境设置
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -64,6 +67,8 @@ Plugin 'kevinw/pyflakes-vim'
 Plugin 'jiangmiao/auto-pairs'
 " 文件搜索
 Plugin 'kien/ctrlp.vim'
+" 全局搜索
+Plugin 'dyng/ctrlsf.vim'
 " 实时更新文件
 Plugin 'djoshea/vim-autoread'
 call vundle#end()
@@ -72,29 +77,46 @@ call vundle#end()
 set t_Co=256
 
 """""youcompleteme""
-let g:ycm_autoclose_preview_window_after_completion=1
 "是否开启语义补全"
 let g:ycm_seed_identifiers_with_syntax=1
 "是否在注释中也开启补全"
-let g:ycm_complete_in_comments=1
+let g:ycm_complete_in_comments=0
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 "开始补全的字符数"
 let g:ycm_min_num_of_chars_for_completion=2
 "补全后自动关机预览窗口"
 let g:ycm_autoclose_preview_window_after_completion=1
 " 禁止缓存匹配项,每次都重新生成匹配项"
-let g:ycm_cache_omnifunc=0
+let g:ycm_cache_omnifunc=1
 "字符串中也开启补全"
 let g:ycm_complete_in_strings = 1
+"回车结束停止自动补全
+let g:ycm_key_list_stop_completion = ['<CR>']
 "离开插入模式后自动关闭预览窗口"
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-"回车即选中当前项"
-inoremap <expr> <CR>       pumvisible() ? '<C-y>' : '\<CR>'     
 "上下左右键行为"
 inoremap <expr> <Down>     pumvisible() ? '\<C-n>' : '\<Down>'
 inoremap <expr> <Up>       pumvisible() ? '\<C-p>' : '\<Up>'
 inoremap <expr> <PageDown> pumvisible() ? '\<PageDown>\<C-p>\<C-n>' : '\<PageDown>'
 inoremap <expr> <PageUp>   pumvisible() ? '\<PageUp>\<C-p>\<C-n>' : '\<PageUp>'
+
+"""""ctrlsf"""""
+"全局搜索模式normal/compact
+let g:ctrlsf_default_view_mode = 'compact'
+"忽略文件夹
+let g:ctrlsf_ignore_dir = ["client"]
+"自动关闭搜索窗口
+let g:ctrlsf_auto_close = {"normal": 1, "compact": 1} 
+"自动聚焦搜索窗口
+let g:ctrlsf_auto_focus = {"at": "done", "duration_less_than": 10000}
+"搜索模式
+let g:ctrlsf_search_mode = 'async'
+"窗口高度
+let g:ctrlsf_winsize = '20%'
+"额外参数
+let g:ctrlsf_extra_backend_args = {'ack': '--ignore-file=match:/tags/'}
+"位置
+let g:ctrlsf_position = 'right'
 
 " 添加flakes
 let g:pyflakes_use_quickfix=1
@@ -113,8 +135,6 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=T
 
-" 总是显示状态栏
-set laststatus=2
 " 开启行号显示
 set number
 " 高亮显示当前行
