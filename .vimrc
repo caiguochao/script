@@ -160,7 +160,7 @@ set noexpandtab
 " 自动开启目录
 autocmd VimEnter * NERDTree
 " 使用NERDTree插件查看工程文件
-nmap <Leader>ls :NERDTreeToggle<CR>
+nmap <f2> :NERDTreeToggle<CR>
 " 设置NERDTree子窗口宽度
 let NERDTreeWinSize=32
 " 设置NERDTree子窗口位置
