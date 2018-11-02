@@ -17,7 +17,15 @@ send "    if 'StatStub' in key.__str__(): statStub = key\r"
 sleep 0.01
 send "    if 'RollStub' in key.__str__(): rollStub = key\r"
 sleep 0.01
-send "    print key\r\r"
+send "    if 'GlobalEventCallback' in key.__str__(): callBack = key\r"
 sleep 0.01
-send "p=e._entities\['W9bFdAY5Bl33KEEK'\]\r"
+send "    if 'Channel' in key.__str__(): channel = key\r"
+sleep 0.01
+send "    print key\r\r\r"
+sleep 0.01
+send "p=e._entities\['W9mcOQY5BgfUBiyK'\]\r"
+sleep 0.01
+send "import GameLocalData as GLD\r"
+sleep 0.01
+send "GLD.ENTITY_STATS\r"
 interact

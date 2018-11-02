@@ -24,13 +24,13 @@ nmap <Leader>q :q<CR>
 " 保存当前窗口内容
 nmap <Leader>w :w<CR>
 " 跳转至右方的窗口
-nnoremap <Leader>lw <C-W>l
+nnoremap <Leader>l <C-W>l
 " 跳转至左方的窗口
-nnoremap <Leader>hw <C-W>h
+nnoremap <Leader>h <C-W>h
 " 跳转至上方的子窗口
-nnoremap <Leader>kw <C-W>k
+nnoremap <Leader>k <C-W>k
 " 跳转至下方的子窗口
-nnoremap <Leader>jw <C-W>j
+nnoremap <Leader>j <C-W>j
 " 跳转到前一个tab
 nmap <Leader>tp :tabp<CR>
 " 跳转到下一个tab
