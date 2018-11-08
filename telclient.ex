@@ -24,8 +24,4 @@ sleep 0.01
 send "    print key\r\r\r"
 sleep 0.01
 send "p=e._entities\['W9mcOQY5BgfUBiyK'\]\r"
-sleep 0.01
-send "import GameLocalData as GLD\r"
-sleep 0.01
-send "GLD.ENTITY_STATS\r"
 interact
