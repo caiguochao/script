@@ -1,3 +1,3 @@
 #!/bin/bash
-cd ~/h63/Program/Server/operations
+cd ~/trunk/Program/Server/operations
 bash reload.sh -o
