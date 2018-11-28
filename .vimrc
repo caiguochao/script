@@ -63,8 +63,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
 " 代码检查
 Plugin 'kevinw/pyflakes-vim'
-" 自动补全括号
-"Plugin 'jiangmiao/auto-pairs'
 " 文件搜索
 Plugin 'kien/ctrlp.vim'
 " 全局搜索
